@@ -1,5 +1,6 @@
 import 'package:extended_text_field/extended_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 
 void main() {
   runApp(const App());
@@ -35,6 +36,7 @@ class _EquationTextFieldState extends State<EquationTextField> {
   Widget build(BuildContext context) {
     return ExtendedTextField(
       controller: controller,
+      maxLines: 10,
       specialTextSpanBuilder: EquationSpanBuilder(context, controller),
     );
   }
@@ -76,10 +78,7 @@ class EquationText extends SpecialText {
   InlineSpan finishText() {
     return ExtendedWidgetSpan(
       actualText: 'Hello',
-      child: Text(
-        toString(),
-        style: const TextStyle(color: Colors.orange),
-      ),
+      child: Math.tex(toString().substring(2, toString().length-2)),
     );
   }
 }
